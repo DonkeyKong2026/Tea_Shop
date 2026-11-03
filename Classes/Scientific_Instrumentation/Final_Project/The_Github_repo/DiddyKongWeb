@@ -1,1 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a91f25">
+  <title>DK's Jungle Journal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito+Sans:wght@400;600;700;800;900&family=Press+Start+2P&display=swap');
 
+    :root {
+      --red: #b5222a;
+      --red-dark: #79151c;
+      --ink: #171414;
+      --paper: #f4eddd;
+      --paper-deep: #e8dcc4;
+      --yellow: #f3c64e;
+      --muted: #776b5e;
+      --line: rgba(23,20,20,.2);
+      --shadow: 7px 7px 0 var(--ink);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--red);
+      background-image: radial-gradient(rgba(0,0,0,.12) 1px, transparent 1px);
+      background-size: 8px 8px;
+      font-family: "Nunito Sans", Arial, sans-serif;
+    }
+    a { color: inherit; }
+    .site-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 24px auto;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      box-shadow: 12px 12px 0 rgba(0,0,0,.28);
+    }
+    .top-strip {
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      padding: 9px 22px; background:var(--ink); color:var(--paper);
+      font: 10px "DM Mono", monospace; letter-spacing:.09em; text-transform:uppercase;
+    }
+    .top-strip span:last-child { color:var(--yellow); }
+    header {
+      position:relative; overflow:hidden; padding: 28px 5.5% 30px;
+      color:var(--paper); background:var(--red);
+      border-bottom: 3px solid var(--ink);
+    }
+    header:after {
+      content:"DK"; position:absolute; right:3%; top:-38px;
+      color:rgba(0,0,0,.11); font: 150px "Press Start 2P", monospace;
+      transform:rotate(-8deg); pointer-events:none;
+    }
+    .brandline { display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
+    .monogram {
+      width:58px; height:58px; display:grid; place-items:center;
+      background:var(--yellow); color:var(--ink); border:3px solid var(--ink);
+      box-shadow:4px 4px 0 var(--ink); transform:rotate(-5deg);
+      font: 23px "Press Start 2P", monospace;
+    }
+    .eyebrow { margin:0 0 7px; font:10px "DM Mono",monospace; letter-spacing:.16em; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(26px,4.4vw,48px); line-height:.98; font-weight:900; letter-spacing:-.055em; }
+    .tagline { margin:15px 0 0; max-width:570px; color:#f8e9d4; font-size:15px; line-height:1.55; }
+    nav {
+      display:flex; flex-wrap:wrap; gap:8px; padding:12px 5.5%;
+      background:var(--yellow); border-bottom:3px solid var(--ink);
+    }
+    nav a {
+      text-decoration:none; padding:7px 12px; border:2px solid transparent;
+      font:11px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.05em;
+    }
+    nav a:hover, nav a:focus-visible { border-color:var(--ink); background:var(--paper); outline:none; }
+    main { padding: 34px 5.5% 50px; }
+    .intro-row { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:24px; }
+    .section-kicker { color:var(--red-dark); font:10px "DM Mono",monospace; letter-spacing:.14em; text-transform:uppercase; }
+    h2 { margin:6px 0 0; font-size:clamp(23px,3vw,32px); line-height:1; letter-spacing:-.045em; }
+    .issue { font:10px "DM Mono",monospace; color:var(--muted); text-align:right; line-height:1.6; }
+    .feature {
+      display:grid; grid-template-columns:1.15fr .85fr; gap:0;
+      border:3px solid var(--ink); box-shadow:var(--shadow); background:#fffaf0;
+      margin-bottom:42px;
+    }
+    .feature-copy { padding:26px; display:flex; flex-direction:column; justify-content:center; }
+    .stamp { display:inline-block; align-self:flex-start; padding:6px 9px; background:var(--red); color:white;
+      font:9px "DM Mono",monospace; text-transform:uppercase; transform:rotate(-2deg); }
+    .feature h3 { margin:17px 0 10px; font-size:clamp(25px,3vw,38px); line-height:.98; letter-spacing:-.05em; }
+    .feature p { color:#51483f; line-height:1.65; margin:0 0 14px; font-size:14px; }
+    .read-link { width:max-content; text-decoration:none; border-bottom:2px solid var(--red); font-weight:900; font-size:13px; }
+    .read-link:hover { color:var(--red); }
+    .feature-art {
+      min-height:270px; border-left:3px solid var(--ink); position:relative; overflow:hidden;
+      display:grid; place-items:center; background:
+        radial-gradient(circle at 70% 28%, #f8d66e 0 8%, transparent 8.5%),
+        linear-gradient(145deg,#2a1917 0 40%,#541b1c 40% 66%,#1b1715 66%);
+    }
+    .feature-art .banana { font-size:clamp(90px,13vw,150px); filter:drop-shadow(7px 9px 0 rgba(0,0,0,.3)); transform:rotate(-24deg); }
+    .feature-art:after { content:"JUNGLE BEAT"; position:absolute; bottom:15px; right:16px; color:var(--yellow); font:10px "DM Mono",monospace; letter-spacing:.15em; }
+    .posts-heading { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+    .posts-heading h2 { white-space:nowrap; }
+    .rule { height:2px; flex:1; background:var(--ink); opacity:.22; }
+    .post-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+    article.post {
+      background:#fffaf0; border:2px solid var(--ink); box-shadow:5px 5px 0 var(--ink);
+      min-width:0;
+    }
+    .post-image {
+      position:relative; min-height:210px; border-bottom:2px solid var(--ink);
+      display:grid; place-items:center; overflow:hidden;
+      background:linear-gradient(135deg,#28201d,#5b2524 55%,#211817);
+    }
+    .post-image.gold { background:linear-gradient(135deg,#44351b,#b47c24 52%,#37251a); }
+    .post-image.green { background:linear-gradient(135deg,#152d22,#32613d 55%,#17251c); }
+    .post-image.pink { background:linear-gradient(135deg,#3d1e24,#a33e43 55%,#27191d); }
+    .image-placeholder { text-align:center; color:rgba(255,244,222,.9); padding:18px; }
+    .image-placeholder .camera { display:block; font-size:35px; margin-bottom:9px; }
+    .image-placeholder strong { display:block; font:10px "DM Mono",monospace; letter-spacing:.1em; text-transform:uppercase; }
+    .image-placeholder small { display:block; margin-top:6px; font-size:11px; opacity:.75; }
+    .post-body { padding:19px 20px 21px; }
+    .meta { display:flex; justify-content:space-between; gap:10px; color:var(--red-dark); font:9px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.07em; }
+    .post h3 { margin:10px 0 8px; font-size:22px; letter-spacing:-.04em; line-height:1.05; }
+    .post-body > p { color:#5b5147; font-size:13px; line-height:1.6; margin:0 0 13px; }
+    details { border-top:1px dashed rgba(23,20,20,.3); padding-top:11px; }
+    summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:10px;
+      color:var(--red-dark); font:10px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.06em; }
+    summary::-webkit-details-marker { display:none; }
+    summary:after { content:"＋"; font-size:17px; line-height:1; color:var(--ink); }
+    details[open] summary:after { content:"−"; }
+    .details-copy { padding:10px 2px 0; color:#51483f; font-size:13px; line-height:1.7; }
+    .details-copy p { margin:0 0 8px; }
+    .details-copy p:last-child { margin-bottom:0; }
+    .note {
+      display:flex; gap:15px; align-items:center; margin-top:38px; padding:18px 20px;
+      background:var(--yellow); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--ink);
+    }
+    .note-mark { font:20px "Press Start 2P",monospace; }
+    .note p { margin:0; font-size:13px; line-height:1.5; }
+    footer {
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+      padding:18px 5.5%; background:var(--ink); color:var(--paper);
+      font:9px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.08em;
+    }
+    footer a { color:var(--yellow); text-decoration:none; }
+    .back-top { position:fixed; right:18px; bottom:18px; width:42px; height:42px; display:grid; place-items:center;
+      background:var(--yellow); border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink);
+      text-decoration:none; font-size:20px; z-index:5; }
+    @media (max-width:700px) {
+      .site-shell { width:calc(100% - 18px); margin:9px auto; }
+      .top-strip { padding:8px 13px; font-size:8px; }
+      header { padding:24px 20px 26px; }
+      header:after { font-size:95px; top:-15px; right:-8px; }
+      .monogram { width:48px; height:48px; font-size:18px; }
+      nav { padding:10px 14px; gap:2px; }
+      nav a { padding:7px 8px; font-size:9px; }
+      main { padding:27px 20px 38px; }
+      .feature { grid-template-columns:1fr; }
+      .feature-art { min-height:190px; border-left:0; border-top:3px solid var(--ink); grid-row:1; }
+      .feature-copy { padding:22px; }
+      .post-grid { grid-template-columns:1fr; gap:20px; }
+      .intro-row { align-items:start; }
+      .issue { max-width:100px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="site-shell">
+    <div class="top-strip">
+      <span>★ The unofficial jungle dispatch ★</span>
+      <span>Vol. 01 &nbsp; / &nbsp; Established in the treetops</span>
+    </div>
+
+    <header>
+      <div class="brandline">
+        <div class="monogram" aria-hidden="true">DK</div>
+        <div>
+          <p class="eyebrow">A little corner of the jungle</p>
+          <h1>DK's Jungle Journal</h1>
+        </div>
+      </div>
+      <p class="tagline">Bananas, barrels, questionable decisions, and field notes from the island. Pull up a vine and stay a while.</p>
+    </header>
+
+    <nav aria-label="Main navigation">
+      <a href="#latest">Latest posts</a>
+      <a href="#field-notes">Field notes</a>
+      <a href="#about">About this place</a>
+      <a href="mailto:hello@example.com">Send a message</a>
+    </nav>
+
+    <main>
+      <section class="intro-row" id="latest">
+        <div>
+          <div class="section-kicker">From the treetop desk</div>
+          <h2>Fresh off the vine.</h2>
+        </div>
+        <div class="issue">ISSUE NO. 01<br>UPDATED WHENEVER</div>
+      </section>
+
+      <section class="feature" aria-label="Featured post">
+        <div class="feature-copy">
+          <span class="stamp">Featured story</span>
+          <h3>Another day, another banana.</h3>
+          <p>Somewhere between the treehouse and the beach, there's always a story worth telling. This is the spot for the big adventures, the tiny discoveries, and the occasional snack review.</p>
+          <a class="read-link" href="#field-notes">Get into the journal →</a>
+        </div>
+        <div class="feature-art" role="img" aria-label="Stylized banana against a dark jungle backdrop">
+          <span class="banana" aria-hidden="true">🍌</span>
+        </div>
+      </section>
+
+      <section id="field-notes">
+        <div class="posts-heading">
+          <div>
+            <div class="section-kicker">The notebook</div>
+            <h2>Field notes &amp; findings</h2>
+          </div>
+          <div class="rule"></div>
+        </div>
+
+        <div class="post-grid">
+          <article class="post">
+            <div class="post-image">
+              <!-- Replace this placeholder with: <img src="images/treehouse.jpg" alt="The treehouse"> -->
+              <div class="image-placeholder"><span class="camera">▧</span><strong>Image slot 01</strong><small>Drop a treehouse photo here</small></div>
+            </div>
+            <div class="post-body">
+              <div class="meta"><span>01 / Home base</span><span>Island life</span></div>
+              <h3>Home is where the treehouse is</h3>
+              <p>A quick look at the place where the plans are made, the records are kept, and the snacks mysteriously disappear.</p>
+              <details>
+                <summary>What's going on in this picture?</summary>
+                <div class="details-copy">
+                  <p>This is the treehouse: equal parts headquarters, hangout spot, and banana storage facility. It's not fancy, but the view is hard to beat.</p>
+                  <p><em>Photo note:</em> Add the backstory, a funny detail, or whatever you want visitors to notice.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="post">
+            <div class="post-image gold">
+              <!-- Replace this placeholder with: <img src="images/banana-haul.jpg" alt="A pile of bananas"> -->
+              <div class="image-placeholder"><span class="camera">▧</span><strong>Image slot 02</strong><small>Drop a banana haul photo here</small></div>
+            </div>
+            <div class="post-body">
+              <div class="meta"><span>02 / Provisions</span><span>Very important</span></div>
+              <h3>A totally reasonable banana collection</h3>
+              <p>People collect stamps. People collect coins. Around here, we have our priorities in order.</p>
+              <details>
+                <summary>Open the snack report</summary>
+                <div class="details-copy">
+                  <p>Today's haul is looking strong. A good banana should be yellow, slightly spotty, and acquired without starting a diplomatic incident with the neighboring island.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="post">
+            <div class="post-image green">
+              <!-- Replace this placeholder with: <img src="images/jungle-run.jpg" alt="A jungle trail"> -->
+              <div class="image-placeholder"><span class="camera">▧</span><strong>Image slot 03</strong><small>Drop an adventure photo here</small></div>
+            </div>
+            <div class="post-body">
+              <div class="meta"><span>03 / Out &amp; about</span><span>Expedition log</span></div>
+              <h3>Taking the scenic route</h3>
+              <p>The map said it was a shortcut. The map was wrong. Still, it made for a pretty good afternoon.</p>
+              <details>
+                <summary>Read the expedition notes</summary>
+                <div class="details-copy">
+                  <p>Trail conditions: muddy. Wildlife sightings: plenty. Barrels encountered: more than expected. Would take this route again, but maybe bring a towel next time.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <article class="post">
+            <div class="post-image pink">
+              <!-- Replace this placeholder with: <img src="images/barrel-break.jpg" alt="A barrel in the jungle"> -->
+              <div class="image-placeholder"><span class="camera">▧</span><strong>Image slot 04</strong><small>Drop a barrel photo here</small></div>
+            </div>
+            <div class="post-body">
+              <div class="meta"><span>04 / Island mechanics</span><span>Proceed carefully</span></div>
+              <h3>Barrels: useful, mysterious, everywhere</h3>
+              <p>Storage? Transportation? Surprise launch system? The jungle refuses to give up all its secrets.</p>
+              <details>
+                <summary>So, what's the deal with barrels?</summary>
+                <div class="details-copy">
+                  <p>There are questions best left unanswered. Just check the label before climbing inside, and never assume a barrel is where you left it.</p>
+                </div>
+              </details>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="note" id="about">
+        <div class="note-mark">DK!</div>
+        <p><strong>A note from the editor:</strong> This journal is a fan-made little tribute to Diddy Kong and the wonderfully weird world around him. Swap in your own screenshots, artwork, captions, and stories. The jungle is yours.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span>© Jungle Journal — fan page, not an official Nintendo site</span>
+      <span>Made with <a href="#top">a little monkey business ↑</a></span>
+    </footer>
+  </div>
+  <a class="back-top" href="#top" aria-label="Back to top">↑</a>
+  <script>
+    // Tiny bit of personality: update the browser tab title when a post is opened.
+    const originalTitle = document.title;
+    document.querySelectorAll('details').forEach((panel) => {
+      panel.addEventListener('toggle', () => {
+        const openPanel = document.querySelector('details[open]');
+        document.title = openPanel ? 'Reading the field notes | DK\'s Jungle Journal' : originalTitle;
+      });
+    });
+  </script>
+</body>
+</html>
